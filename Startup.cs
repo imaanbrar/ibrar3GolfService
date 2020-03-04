@@ -32,7 +32,6 @@ namespace ibrar3GolfService
         options.UseSqlServer(Configuration.GetConnectionString("Golf_Dev")));
 
             services.AddTransient<ReservationService>();
-            services.AddTransient<ReservationTimeService>();
 
             services.AddCors(options =>
             {

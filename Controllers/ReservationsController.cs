@@ -17,12 +17,10 @@ namespace ibrar3GolfService.Controllers
     public class ReservationsController : ControllerBase
     {
         private readonly ReservationService _reservationService;
-        private readonly ReservationTimeService _reservationTimeService;
 
-        public ReservationsController(ReservationService reservationService, ReservationTimeService reservationTimeService)
+        public ReservationsController(ReservationService reservationService)
         {
             _reservationService = reservationService;
-            _reservationTimeService = reservationTimeService;
         }
 
         [HttpGet]
@@ -35,12 +33,6 @@ namespace ibrar3GolfService.Controllers
         public async Task<List<Reservation>> GetReservations()
         {
             return await _reservationService.GetReservations();
-        }
-
-        [HttpGet]
-        public async Task<List<ReservationTime>> GetReservationTimes()
-        {
-            return await _reservationTimeService.GetReservationTimes();
         }
 
         [HttpGet]
