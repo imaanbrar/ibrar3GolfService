@@ -52,10 +52,30 @@ namespace ibrar3GolfService.Services
             return data;
         }
 
+        public async Task<List<ReservationView>> GetReservationsByUserId(int id)
+        {
+            var data = await _context.Reservation.Where(x => x.UserId == id).Select(x => new ReservationView
+            {
+                Id = x.Id,
+                TypeCode = x.TypeCode,
+                UserId = x.UserId,
+                Players = x.Players,
+                IsApproved = x.IsApproved,
+                StartDateTime = x.StartDateTime,
+                EndDateTime = x.EndDateTime,
+                RecurringRule = x.RecurringRule,
+                RecurringDay = x.RecurringDay,
+                UserName = x.User.Name,
+                ReservationType = x.TypeCode == "O" ? "One Time" : "Standing"
+            }).ToListAsync();
+            return data;
+        }
+
         public async Task<bool> CreateReservation(Reservation reservation)
         {
             try
             {
+                reservation.StartDateTime = reservation.StartDateTime.AddHours(-7);
                 reservation = setReservation(reservation);
                 await _context.Reservation.AddAsync(reservation);
                 await _context.SaveChangesAsync();

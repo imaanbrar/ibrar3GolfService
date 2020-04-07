@@ -40,7 +40,13 @@ namespace ibrar3GolfService.Controllers
         {
             return await _reservationService.GetReservationById(id);
         }
-               
+
+        [HttpGet]
+        public async Task<List<ReservationView>> GetReservationsByUserId(int id)
+        {
+            return await _reservationService.GetReservationsByUserId(id);
+        }
+
         [HttpPost]
         public async Task<bool> PostReservation([FromBody] Reservation reservation)
         {
